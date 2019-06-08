@@ -1,0 +1,16 @@
+kind: pipeline
+name: default
+
+steps:
+- name: k8s
+  image: croissong/verdun-ci:k8s
+  pull: always
+  environment:
+    DOCKER_USER:
+      from_secret: DOCKER_USER
+    DOCKER_PASSWORD:
+      from_secret: DOCKER_PASSWORD
+    DEPLOY_KEY_B64:
+      from_secret: DEPLOY_KEY_B64
+  commands:
+  - python3 .ci/ci.py
