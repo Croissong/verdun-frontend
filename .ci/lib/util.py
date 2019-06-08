@@ -52,7 +52,7 @@ def init_git_conf(repo):
 def login_docker():
     docker_user = environ['DOCKER_USER']
     docker_password = environ['DOCKER_PASSWORD']
-    run_cmd(f'docker login --username={docker_user} --password-stdin', input=docker_password.decode('utf-8'))
+    run_cmd(f'docker login --username={docker_user} --password-stdin', input=docker_password)
 
 def build_push_container(directory, image):
     if not is_local():
