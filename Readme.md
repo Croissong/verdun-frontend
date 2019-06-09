@@ -1,1 +1,1 @@
-[![Build Status](https://cloud.drone.io/api/badges/Croissong/verdun-frontend/status.svg)](https://cloud.drone.io/Croissong/verdun-frontend)
+[![Build Status](https://cloud.drone.io/api/badges/Croissong/verdun-frontend/status.svg)](https://cloud.drone.io/Croissong/verdun-frontend) [![Greenkeeper badge](https://badges.greenkeeper.io/Croissong/verdun-frontend.svg)](https://greenkeeper.io/)
