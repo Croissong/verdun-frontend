@@ -3,7 +3,7 @@ import json
 import shlex
 from base64 import b64decode
 from git import Repo
-from os import environ, getcwd
+from os import environ, getcwd, chmod
 from subprocess import run, CalledProcessError, STDOUT
 from lib.config import docker_client, docker_client_api, logger
 
@@ -43,8 +43,10 @@ def clone_repo(path, write=False):
 
 def add_ssh_key():
     deploy_key = b64decode(environ['DEPLOY_KEY_B64'])
-    with open('~/.ssh/id_rsa', 'bw') as f:
+    with open('id_rsa', 'bw') as f:
         f.write(deploy_key)
+    chmod('id_rsa', 0o400)
+    run_cmd('ssh-add id_rsa')
 
 def init_git_conf(repo):
     conf = repo.config_writer()

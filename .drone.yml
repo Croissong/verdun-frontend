@@ -2,23 +2,23 @@ kind: pipeline
 name: default
 
 steps:
-- name: tag-image
-  image: croissong/verdun-ci:frontend
-  pull: always
-  environment:
-    DEPLOY_KEY_B64:
-      from_secret: DEPLOY_KEY_B64
-  commands:
-    - python3 .ci/ci.py tag-image
+# - name: tag-image
+#   image: croissong/verdun-ci:frontend
+#   pull: always
+#   environment:
+#     DEPLOY_KEY_B64:
+#       from_secret: DEPLOY_KEY_B64
+#   commands:
+#     - python3 .ci/ci.py tag-image
 
-- name: build_frontend_image
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: DOCKER_USER
-    password:
-      from_secret: DOCKER_PASSWORD
-    repo: croissong/verdun-frontend
+# - name: build_frontend_image
+#   image: plugins/docker
+#   settings:
+#     username:
+#       from_secret: DOCKER_USER
+#     password:
+#       from_secret: DOCKER_PASSWORD
+#     repo: croissong/verdun-frontend
 
 - name: update-deployment
   image: croissong/verdun-ci:frontend
@@ -27,4 +27,6 @@ steps:
     DEPLOY_KEY_B64:
       from_secret: DEPLOY_KEY_B64
   commands:
+    - eval `ssh-agent -s`
+    - mkdir ~/.ssh/ && ssh-keyscan -H github.com >> ~/.ssh/known_hosts
     - python3 .ci/ci.py update-deployment
