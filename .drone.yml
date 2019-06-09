@@ -2,8 +2,8 @@ kind: pipeline
 name: default
 
 steps:
-- name: k8s
-  image: croissong/verdun-ci:k8s
+- name: frontend
+  image: croissong/verdun-ci:frontend
   pull: always
   environment:
     DOCKER_USER:
@@ -12,5 +12,12 @@ steps:
       from_secret: DOCKER_PASSWORD
     DEPLOY_KEY_B64:
       from_secret: DEPLOY_KEY_B64
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
   commands:
-  - python3 .ci/ci.py
+    - sleep 10
+    - python3 .ci/ci.py
+
+services:
+  - name: docker
+    image: 'docker:dind'

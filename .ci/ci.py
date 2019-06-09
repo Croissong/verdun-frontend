@@ -1,7 +1,7 @@
 import click
 from os import path
-from lib.util import is_dev, get_git_hash, get_repo, clone_repo, build_push_container
-from lib.config import init, yaml, VERDUN_REPO_PATH
+from lib.util import is_dev, is_local, login_docker, get_git_hash, get_repo, clone_repo, docker_build
+from lib.config import init, yaml, VERDUN_REPO_PATH, docker_client
 
 init()
 
@@ -12,8 +12,8 @@ def ci(local, dev):
     repo = get_repo()
     tag = get_git_hash(repo)
     image = f'croissong/verdun-frontend:{tag}'
-    build_push_container('frontend', image)
-    verdun_repo = clone_repo(VERDUN_REPO_PATH)
+    build_push_container(image)
+    verdun_repo = clone_repo(VERDUN_REPO_PATH, write=True)
     update_deployment(tag)
     git_push(verdun_repo, tag)
 
@@ -31,6 +31,14 @@ def git_push(repo, tag):
     if not is_dev():
         repo.git.commit('-m', f'Bump verdun-frontend -> {tag}')
         repo.git.push('origin', 'master')
+
+def build_push_container(image):
+    if not is_local():
+        login_docker()
+    docker_build(tag=image, path='.')
+    if not is_dev():
+        docker_client.images.push(image)
+
 
 if __name__ == '__main__':
     ci()

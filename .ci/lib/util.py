@@ -1,10 +1,12 @@
 import click
+import json
 import shlex
 from base64 import b64decode
 from git import Repo
 from os import environ, getcwd
 from subprocess import run, CalledProcessError, STDOUT
-from lib.config import logger
+from lib.config import docker_client, docker_client_api, logger
+
 
 def is_local() -> bool:
     return click.get_current_context().params['local']
@@ -29,7 +31,7 @@ def get_repo(path=getcwd(), write=False):
         init_git_conf(repo)
     return repo
 
-def clone_repo(path, write):
+def clone_repo(path, write=False):
     if not is_local():
         add_ssh_key()
         repo = Repo.clone_from('git@github.com:Croissong/verdun.git', path)
@@ -50,15 +52,15 @@ def init_git_conf(repo):
     conf.set_value('user', 'email', 'verdun-ci-bot@patrician.gold').release()
 
 def login_docker():
-    docker_user = environ['DOCKER_USER']
-    docker_password = environ['DOCKER_PASSWORD']
-    run_cmd(f'docker login --username={docker_user} --password-stdin', input=docker_password)
+    user = environ['DOCKER_USER']
+    password = environ['DOCKER_PASSWORD']
+    docker_client.login(user, password)
+    docker_client_api.login(user, password)
 
-def build_push_container(directory, image):
-    if not is_local():
-        login_docker()
-    if is_dev():
-        logger.info(f'Skipping building image {image}')
-    else:
-        run_cmd(f'docker build -t {image} {directory}')
-        run_cmd(f'docker push {image}')
+def docker_build(**kwargs):
+    for line in docker_client_api.build(**kwargs):
+        line = json.loads(line.decode('utf-8'))
+        if 'stream' in line:
+            line = line['stream'].rstrip('\n')
+            if line:
+                logger.info(line)
