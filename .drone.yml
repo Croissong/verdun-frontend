@@ -2,22 +2,29 @@ kind: pipeline
 name: default
 
 steps:
-- name: frontend
+- name: tag-image
   image: croissong/verdun-ci:frontend
   pull: always
   environment:
-    DOCKER_USER:
-      from_secret: DOCKER_USER
-    DOCKER_PASSWORD:
-      from_secret: DOCKER_PASSWORD
     DEPLOY_KEY_B64:
       from_secret: DEPLOY_KEY_B64
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
   commands:
-    - sleep 10
-    - python3 .ci/ci.py
+    - python3 .ci/ci.py tag-image
 
-services:
-  - name: docker
-    image: 'docker:dind'
+- name: build_frontend_image
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: DOCKER_USER
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: croissong/verdun-frontend
+
+- name: update-deployment
+  image: croissong/verdun-ci:frontend
+  pull: always
+  environment:
+    DEPLOY_KEY_B64:
+      from_secret: DEPLOY_KEY_B64
+  commands:
+    - python3 .ci/ci.py update-deployment

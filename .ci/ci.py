@@ -5,19 +5,33 @@ from lib.config import init, yaml, VERDUN_REPO_PATH, docker_client
 
 init()
 
-@click.command()
+@click.group()
 @click.option('--local/--ci', default=False)
 @click.option('--dev/--prod', default=False)
-def ci(local, dev):
+@click.pass_context
+def ci(ctx, local, dev):
+    ctx.ensure_object(dict)
+    ctx.obj['local'] = local
+    ctx.obj['dev'] = dev
+
+@ci.command()
+@click.pass_context
+def tag_image(ctx):
     repo = get_repo()
     tag = get_git_hash(repo)
-    image = f'croissong/verdun-frontend:{tag}'
-    build_push_container(image)
-    verdun_repo = clone_repo(VERDUN_REPO_PATH, write=True)
-    update_deployment(tag)
-    git_push(verdun_repo, tag)
+    if is_local():
+        image = f'croissong/verdun-frontend:{tag}'
+        build_push_container(image)
+    else:
+        with open('.tags', 'w') as f:
+            f.write(tag)
 
-def update_deployment(tag):
+@ci.command()
+@click.pass_context
+def update_deployment(ctx):
+    repo = get_repo()
+    tag = get_git_hash(repo)
+    verdun_repo = clone_repo(VERDUN_REPO_PATH, write=True)
     images_file = path.join(VERDUN_REPO_PATH, 'k8s/values/images.yml')
     with open(images_file, 'r+', encoding='utf-8') as f:
         images = yaml.load(f)
@@ -25,6 +39,7 @@ def update_deployment(tag):
         f.seek(0)
         f.truncate()
         yaml.dump(images, f)
+    git_push(verdun_repo, tag)
 
 def git_push(repo, tag):
     repo.git.add('k8s')

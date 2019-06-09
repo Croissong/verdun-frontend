@@ -9,10 +9,10 @@ from lib.config import docker_client, docker_client_api, logger
 
 
 def is_local() -> bool:
-    return click.get_current_context().params['local']
+    return click.get_current_context().obj['local']
 
 def is_dev() -> bool:
-    return click.get_current_context().params['dev']
+    return click.get_current_context().obj['dev']
 
 def run_cmd(cmd, check=True, input=None, cwd=None):
     try:
