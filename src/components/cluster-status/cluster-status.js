@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MatrixStatus from './matrix-status';
 import MumbleStatus from './mumble-status';
+import VerdunStatus from './verdun-status';
 import MiscStatus from './misc-status';
 import axios from 'axios';
 import parsePrometheusTextFormat from 'parse-prometheus-text-format';
@@ -20,6 +21,7 @@ export default class ClusterStatus extends Component {
         <MatrixStatus loading={loading} metrics={get(metrics, 'matrix')} />
         <MumbleStatus loading={loading} metrics={get(metrics, 'murmur')} />
         <MiscStatus loading={loading} metrics={get(metrics, 'misc')} />
+        <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
       </div>
     );
   }
@@ -37,7 +39,7 @@ export default class ClusterStatus extends Component {
           metrics
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ loading: false, error });
       });
   };
@@ -45,20 +47,22 @@ export default class ClusterStatus extends Component {
 
 const metricMappers = {
   kube_pod_container_status_ready: ({ value }) => ({ ready: value }),
-  kube_pod_container_info: ({ labels: { image } }) => ({ image })
+  kube_pod_container_info: ({ labels: { image } }) => ({ image }),
+  kube_pod_labels: ({ labels: { label_version: version } }) =>
+    version ? { version } : null
 };
 
-const normalizeMetrics = data =>
+const normalizeMetrics = (data) =>
   data.reduce((res, { name, metrics }) => {
     const mapper = metricMappers[name];
     if (!mapper) {
       return res;
     }
-
     const normalized = metrics.reduce((res, metric) => {
-      const {
-        labels: { namespace, container }
+      let {
+        labels: { namespace, container, pod }
       } = metric;
+      container = container || podToContainer(pod);
       return merge(res, {
         [namespace]: {
           [container]: mapper(metric)
@@ -68,3 +72,9 @@ const normalizeMetrics = data =>
 
     return merge(res, normalized);
   }, {});
+
+const podToContainer = (pod) =>
+  pod
+    .split('-')
+    .slice(0, -2)
+    .join('-');

@@ -7,7 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%'
   },
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ContainerStatus = ({ title, subheader, icon, metrics }) => {
+const ContainerStatus = ({ title, subheader, icon, metrics, images }) => {
   const classes = useStyles();
   return (
     <ListItem style={{ flexWrap: 'wrap' }}>
@@ -39,15 +39,31 @@ const ContainerStatus = ({ title, subheader, icon, metrics }) => {
             />
           </div>
         </div>
-        <CardContent>
-          {metrics && (
-            <Typography>
-              Image: <code>{metrics.image}</code>
-            </Typography>
-          )}
-        </CardContent>
+        {metrics && content(metrics, images)}
       </Card>
     </ListItem>
   );
 };
+
+const content = (metrics, images) => (
+  <CardContent>
+    {!images ? (
+      <Typography key={metrics.image}>
+        Image: <code>{metrics.image}</code>
+      </Typography>
+    ) : (
+      [
+        <Typography key={images.image}>
+          Image: <code>{images.image}</code>
+        </Typography>,
+        ...images.extra.map((img) => (
+          <Typography key={metrics.image}>
+            {img.name}: <code>{img.image}</code>
+          </Typography>
+        ))
+      ]
+    )}
+  </CardContent>
+);
+
 export default ContainerStatus;
