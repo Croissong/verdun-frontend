@@ -74,9 +74,12 @@ module.exports = {
         // },
       }
       // 'gatsby-plugin-styled-components',
+    },
+    {
+      resolve: 'gatsby-plugin-zopfli'
     }
   ],
-  developMiddleware: app => {
+  developMiddleware: (app) => {
     app.use(
       '/metrics',
       proxy({
