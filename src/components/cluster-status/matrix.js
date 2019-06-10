@@ -8,6 +8,7 @@ import { get } from 'lodash';
 
 const MatrixStatus = ({ loading, metrics }) => (
   <Status
+    title="Matrix"
     loading={loading}
     icon={<MatrixIcon style={{ height: '2rem', width: '6rem' }} />}
   >

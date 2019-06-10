@@ -9,13 +9,14 @@ const VerdunStatus = ({ loading, metrics }) => {
   const frontendMetrics = get(metrics, 'verdun-frontend');
   return (
     <Status
+      title="Verdun"
       loading={loading}
       icon={<VerdunIcon style={{ height: '2rem', width: '6rem' }} />}
     >
       <ContainerStatus
         icon={<VerdunIcon style={{ height: '2rem', width: '2rem' }} />}
         title="Verdun"
-        subheader="Verdun Frontend"
+        subheader="Cluster Frontend"
         metrics={frontendMetrics}
         images={{
           image: `croissong/verdun-frontend:${get(frontendMetrics, 'version')}`,
@@ -25,8 +26,8 @@ const VerdunStatus = ({ loading, metrics }) => {
 
       <ContainerStatus
         icon={<PrometheusIcon style={{ height: '2rem', width: '2rem' }} />}
-        title="kube-state-metrics "
-        subheader="Expose cluster-level metrics"
+        title="kube-state-metrics"
+        subheader="Expose cluster metrics"
         metrics={get(metrics, 'kube-state-metrics')}
       />
     </Status>

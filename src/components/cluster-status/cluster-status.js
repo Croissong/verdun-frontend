@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import MatrixStatus from './matrix-status';
-import MumbleStatus from './mumble-status';
 import { makeStyles } from '@material-ui/core/styles';
-import VerdunStatus from './verdun-status';
-import MiscStatus from './misc-status';
 import axios from 'axios';
-import parsePrometheusTextFormat from 'parse-prometheus-text-format';
 import { get, merge } from 'lodash';
+import parsePrometheusTextFormat from 'parse-prometheus-text-format';
+
+import MatrixStatus from './matrix';
+import MumbleStatus from './mumble';
+import VerdunStatus from './verdun';
+import MiscStatus from './misc';
+import TraefikStatus from './traefik';
 
 const ClusterStatus = () => {
   const [metrics, setMetrics] = useState({});
@@ -32,6 +34,7 @@ const ClusterStatus = () => {
       <MumbleStatus loading={loading} metrics={get(metrics, 'murmur')} />
       <MiscStatus loading={loading} metrics={get(metrics, 'misc')} />
       <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
+      <TraefikStatus loading={loading} metrics={get(metrics, 'traefik')} />
     </>
   );
 };
