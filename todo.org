@@ -1,2 +1,3 @@
 - https://wearestabl.com/
 - https://github.com/FormidableLabs/urql
+- https://github.com/kubernetes/kube-state-metrics/pull/762

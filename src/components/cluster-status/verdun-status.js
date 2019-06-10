@@ -5,29 +5,32 @@ import ContainerStatus from './container-status';
 import Status from './status';
 import { get } from 'lodash';
 
-const VerdunStatus = ({ loading, metrics }) => (
-  <Status
-    loading={loading}
-    icon={<VerdunIcon style={{ height: '2rem', width: '6rem' }} />}
-  >
-    <ContainerStatus
-      icon={<VerdunIcon style={{ height: '2rem', width: '2rem' }} />}
-      title="Verdun"
-      subheader="Verdun Frontend"
-      metrics={get(metrics, 'verdun-frontend')}
-      images={{
-        image: `verdun-frontend:asd`,
-        extra: [{ name: 'Nginx', image: 'asdgg' }]
-      }}
-    />
+const VerdunStatus = ({ loading, metrics }) => {
+  const frontendMetrics = get(metrics, 'verdun-frontend');
+  return (
+    <Status
+      loading={loading}
+      icon={<VerdunIcon style={{ height: '2rem', width: '6rem' }} />}
+    >
+      <ContainerStatus
+        icon={<VerdunIcon style={{ height: '2rem', width: '2rem' }} />}
+        title="Verdun"
+        subheader="Verdun Frontend"
+        metrics={frontendMetrics}
+        images={{
+          image: `croissong/verdun-frontend:${get(frontendMetrics, 'version')}`,
+          extra: [{ name: 'Nginx', image: get(frontendMetrics, 'image') }]
+        }}
+      />
 
-    <ContainerStatus
-      icon={<PrometheusIcon style={{ height: '2rem', width: '2rem' }} />}
-      title="kube-state-metrics "
-      subheader="Expose cluster-level metrics"
-      metrics={get(metrics, 'kube-state-metrics')}
-    />
-  </Status>
-);
+      <ContainerStatus
+        icon={<PrometheusIcon style={{ height: '2rem', width: '2rem' }} />}
+        title="kube-state-metrics "
+        subheader="Expose cluster-level metrics"
+        metrics={get(metrics, 'kube-state-metrics')}
+      />
+    </Status>
+  );
+};
 
 export default VerdunStatus;
