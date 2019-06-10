@@ -15,6 +15,7 @@ const Status = ({ loading, icon, title, children }) => {
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
+        className={classes.borderBar}
       >
         {icon}
         {title && <h3 className={classes.title}>{title}</h3>}
@@ -41,7 +42,25 @@ const useStyles = makeStyles((theme) => ({
     color: 'green'
   },
   headerIcons: { marginLeft: 'auto' },
-  list: { width: '100%' }
+  list: { width: '100%' },
+  borderBar: {
+    '&:before ': {
+      display: 'block',
+      left: 0,
+      content: '""',
+      height: '75%',
+      width: '0.3rem',
+      background: '#11b4ae9c',
+      borderRadius: 10,
+      position: 'absolute',
+      top: 0,
+      transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
+    },
+    '&.Mui-expanded:before': {
+      height: '100%',
+      background: '#07bbb5'
+    }
+  }
 }));
 
 export default Status;

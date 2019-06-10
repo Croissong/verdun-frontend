@@ -1,49 +1,51 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import MatrixStatus from './matrix-status';
 import MumbleStatus from './mumble-status';
+import { makeStyles } from '@material-ui/core/styles';
 import VerdunStatus from './verdun-status';
 import MiscStatus from './misc-status';
 import axios from 'axios';
 import parsePrometheusTextFormat from 'parse-prometheus-text-format';
 import { get, merge } from 'lodash';
 
-export default class ClusterStatus extends Component {
-  state = { loading: false, error: false, metrics: null };
-
-  componentDidMount() {
-    this.fetchMetrics();
-  }
-
-  render() {
-    const { metrics, loading } = this.state;
-    return (
-      <div>
-        <MatrixStatus loading={loading} metrics={get(metrics, 'matrix')} />
-        <MumbleStatus loading={loading} metrics={get(metrics, 'murmur')} />
-        <MiscStatus loading={loading} metrics={get(metrics, 'misc')} />
-        <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
-      </div>
-    );
-  }
-
-  fetchMetrics = () => {
-    this.setState({ loading: true });
-    axios
-      .get('/metrics')
-      .then(({ data }) => {
-        let metrics = parsePrometheusTextFormat(data);
-        metrics = normalizeMetrics(metrics);
-        console.log(metrics);
-        this.setState({
-          loading: false,
-          metrics
-        });
+const ClusterStatus = () => {
+  const [metrics, setMetrics] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setLoading(true);
+    fetchMetrics()
+      .then((metrics) => {
+        setMetrics(metrics);
+        setLoading(false);
       })
       .catch((error) => {
-        this.setState({ loading: false, error });
+        setLoading(false);
+        setError(error);
       });
-  };
-}
+  }, []);
+
+  const classes = useStyles();
+  return (
+    <>
+      <MatrixStatus loading={loading} metrics={get(metrics, 'matrix')} />
+      <MumbleStatus loading={loading} metrics={get(metrics, 'murmur')} />
+      <MiscStatus loading={loading} metrics={get(metrics, 'misc')} />
+      <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
+    </>
+  );
+};
+
+const fetchMetrics = () => {
+  return axios.get('/metrics').then(({ data }) => {
+    let metrics = parsePrometheusTextFormat(data);
+    metrics = normalizeMetrics(metrics);
+    console.log(metrics);
+    return metrics;
+  });
+};
+
+const useStyles = makeStyles((theme) => ({}));
 
 const metricMappers = {
   kube_pod_container_status_ready: ({ value }) => ({ ready: value }),
@@ -78,3 +80,5 @@ const podToContainer = (pod) =>
     .split('-')
     .slice(0, -2)
     .join('-');
+
+export default ClusterStatus;
