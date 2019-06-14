@@ -10,7 +10,7 @@ import HeartbeatIcon from '../../images/heartbeat.svg';
 const Status = ({ loading, icon, title, children }) => {
   const classes = useStyles();
   return (
-    <ExpansionPanel>
+    <ExpansionPanel elevation="2">
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
