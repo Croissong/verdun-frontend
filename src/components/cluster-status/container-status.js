@@ -57,8 +57,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   healthy: {
-    boxShadow:
-      '0px 1px 3px 0px rgba(31, 160, 13, 0.96), 0px 1px 3px 0px rgba(31, 160, 13, 0.96), 0px 0px 3px -1px rgba(31, 160, 13, 0.96)'
+    boxShadow: `0px 1px 3px 0px ${theme.palette.green.main}, 0px 1px 3px 0px ${theme.palette.green.main}, 0px 0px 3px -1px ${theme.palette.green.main}`
   },
   header: {
     display: 'flex',

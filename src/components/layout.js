@@ -11,8 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { StaticQuery, graphql } from 'gatsby';
-
-import Header from './header';
 import { theme } from './theme';
 import './layout.css';
 
@@ -31,7 +29,6 @@ const Layout = ({ children }) => {
       `}
       render={(data) => (
         <ThemeProvider theme={theme}>
-          <Header siteTitle={data.site.siteMetadata.title} />
           <div className={classes.wrapper}>
             <main className={classes.main}>{children}</main>
           </div>

@@ -10,7 +10,7 @@ import HeartbeatIcon from '../../images/heartbeat.svg';
 const Status = ({ loading, icon, title, children }) => {
   const classes = useStyles();
   return (
-    <ExpansionPanel elevation="2">
+    <ExpansionPanel elevation={2}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   heartbeat: {
     height: '2rem',
     width: '2rem',
-    color: 'green'
+    color: theme.palette.green.main
   },
   headerIcons: { marginLeft: 'auto' },
   list: { width: '100%' },
@@ -49,16 +49,18 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       content: '""',
       height: '75%',
+      opacity: 0.5,
       width: '0.3rem',
-      background: '#11b4ae9c',
+      background: theme.palette.primary.light,
       borderRadius: 10,
       position: 'absolute',
       top: 0,
       transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
     },
     '&.Mui-expanded:before': {
+      opacity: 1,
       height: '100%',
-      background: '#07bbb5'
+      background: theme.palette.primary.main
     }
   }
 }));

@@ -6,12 +6,19 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // F0E1C6
 // BD5C55
 // 535670
+
+const colors = {
+  green: {
+    main: '#1FA00D'
+  }
+};
+
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#e1fff8',
-      main: '#afd4c5',
-      dark: '#7fa395',
+      light: '#3da7dd',
+      main: '#0d91d5',
+      dark: '#096595',
       contrastText: '#000000'
     },
     secondary: {
@@ -25,7 +32,8 @@ export const theme = createMuiTheme({
     },
     quaternary: {
       main: '#535670'
-    }
+    },
+    green: colors.green
   },
   status: {
     danger: '#BD5C55'
