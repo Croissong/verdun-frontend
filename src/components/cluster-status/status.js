@@ -6,15 +6,19 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 
+import { useStyles as useBarStyles } from '../shared/bars';
+import { colors } from '../theme';
+
 const Status = ({ loading, icon, title, children }) => {
   const classes = useStyles();
+  const barClasses = useBarStyles({ color: colors.green.light });
   return (
     <ExpansionPanel elevation={2} className={classes.root}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
-        className={classes.borderBar}
+        className={barClasses.vertical}
       >
         {icon}
         {title && <h3 className={classes.title}>{title}</h3>}
@@ -30,7 +34,7 @@ const Status = ({ loading, icon, title, children }) => {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: '0.3rem'
+    marginTop: '0.3rem'
   },
   title: {
     margin: 0,
@@ -38,27 +42,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center'
   },
-  list: { width: '100%' },
-  borderBar: {
-    '&:before ': {
-      display: 'block',
-      left: 0,
-      content: '""',
-      height: '75%',
-      opacity: 0.5,
-      width: '0.3rem',
-      background: theme.palette.primary.light,
-      borderRadius: 10,
-      position: 'absolute',
-      top: 0,
-      transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
-    },
-    '&.Mui-expanded:before': {
-      opacity: 1,
-      height: '100%',
-      background: theme.palette.primary.main
-    }
-  }
+  list: { width: '100%' }
 }));
 
 export default Status;

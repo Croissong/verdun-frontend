@@ -7,8 +7,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // BD5C55
 // 535670
 
-const colors = {
+export const colors = {
   green: {
+    light: '#14ca14',
     main: '#1FA00D'
   },
   yellow: {

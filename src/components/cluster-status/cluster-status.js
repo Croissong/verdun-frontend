@@ -31,6 +31,7 @@ const ClusterStatus = () => {
   }, []);
 
   const healthy = getApplicationHealth(metrics);
+  console.log({ healthy });
   const classes = useHeaderStyles({ healthy });
   return (
     <section>
@@ -99,8 +100,12 @@ const useHeaderStyles = makeStyles((theme) => ({
   heartbeat: {
     height: '2.5rem',
     width: '2.5rem',
+    opacity: ({ healthy }) => (healthy === undefined ? 0.3 : 1),
+    transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
     color: ({ healthy }) =>
-      healthy ? theme.palette.green.main : theme.palette.yellow.main
+      healthy === undefined || healthy
+        ? theme.palette.green.main
+        : theme.palette.yellow.main
   }
 }));
 
