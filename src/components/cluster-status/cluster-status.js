@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { get, merge } from 'lodash';
+import { flow, pickBy, min, flatMap } from 'lodash/fp';
 import parsePrometheusTextFormat from 'parse-prometheus-text-format';
 
 import MatrixStatus from './matrix';
@@ -9,6 +10,8 @@ import MumbleStatus from './mumble';
 import VerdunStatus from './verdun';
 import MiscStatus from './misc';
 import TraefikStatus from './traefik';
+import { HorizontalBar } from '../shared/bars';
+import HeartbeatIcon from '../../images/heartbeat.svg';
 
 const ClusterStatus = () => {
   const [metrics, setMetrics] = useState({});
@@ -27,17 +30,35 @@ const ClusterStatus = () => {
       });
   }, []);
 
-  const classes = useStyles();
+  const healthy = getApplicationHealth(metrics);
+  const classes = useHeaderStyles({ healthy });
   return (
-    <>
+    <section>
+      <header className={classes.root}>
+        <div className={classes.status}>
+          <HeartbeatIcon className={classes.heartbeat} />
+        </div>
+        <div className={classes.title}>
+          <h2>Applications</h2>
+          <HorizontalBar />
+        </div>
+      </header>
       <MatrixStatus loading={loading} metrics={get(metrics, 'matrix')} />
       <MumbleStatus loading={loading} metrics={get(metrics, 'murmur')} />
       <MiscStatus loading={loading} metrics={get(metrics, 'misc')} />
       <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
       <TraefikStatus loading={loading} metrics={get(metrics, 'traefik')} />
-    </>
+    </section>
   );
 };
+
+const applicationNamespaces = ['hefeteig', 'matrix', 'misc', 'murmur'];
+const getApplicationHealth = (metrics) =>
+  flow(
+    pickBy((_val, namespace) => applicationNamespaces.includes(namespace)),
+    flatMap((pods) => Object.values(pods).map(({ ready }) => ready)),
+    min
+  )(metrics);
 
 const fetchMetrics = () => {
   return axios.get('/metrics').then(({ data }) => {
@@ -48,7 +69,40 @@ const fetchMetrics = () => {
   });
 };
 
-const useStyles = makeStyles((theme) => ({}));
+const useHeaderStyles = makeStyles((theme) => ({
+  root: {
+    padding: '0.2rem 24px',
+    display: 'grid',
+    gridTemplate: `
+[row1-start] 'status title' [row1-end]
+/ 6rem max-content
+`
+  },
+  title: {
+    paddingLeft: '1rem',
+    gridArea: 'title',
+    '& h2': {
+      fontFamily: 'serif',
+      fontWeight: 500,
+      letterSpacing: '0.2rem',
+      fontSize: '2rem',
+      marginBottom: 0
+    }
+  },
+  status: {
+    gridArea: 'status',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: '0.5rem'
+  },
+  heartbeat: {
+    height: '2.5rem',
+    width: '2.5rem',
+    color: ({ healthy }) =>
+      healthy ? theme.palette.green.main : theme.palette.yellow.main
+  }
+}));
 
 const metricMappers = {
   kube_pod_container_status_ready: ({ value }) => ({ ready: value }),

@@ -5,12 +5,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
-import HeartbeatIcon from '../../images/heartbeat.svg';
 
 const Status = ({ loading, icon, title, children }) => {
   const classes = useStyles();
   return (
-    <ExpansionPanel elevation={2}>
+    <ExpansionPanel elevation={2} className={classes.root}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -19,9 +18,6 @@ const Status = ({ loading, icon, title, children }) => {
       >
         {icon}
         {title && <h3 className={classes.title}>{title}</h3>}
-        <div className={classes.headerIcons}>
-          <HeartbeatIcon className={classes.heartbeat} />
-        </div>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <List component="nav" className={classes.list}>
@@ -33,15 +29,15 @@ const Status = ({ loading, icon, title, children }) => {
 };
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginBottom: '0.3rem'
+  },
   title: {
-    margin: 0
+    margin: 0,
+    fontFamily: 'monospace',
+    display: 'flex',
+    alignItems: 'center'
   },
-  heartbeat: {
-    height: '2rem',
-    width: '2rem',
-    color: theme.palette.green.main
-  },
-  headerIcons: { marginLeft: 'auto' },
   list: { width: '100%' },
   borderBar: {
     '&:before ': {
