@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
       transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
     },
     '&.MuiExpansionPanelSummary-root:before': {
-      opacity: 0.5
+      opacity: 0.3
     },
     '&.Mui-expanded:before': {
       opacity: 1,
