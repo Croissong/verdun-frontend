@@ -7,7 +7,7 @@ import { get } from 'lodash';
 
 const MiscStatus = ({ loading, metrics }) => (
   <Status
-    title="Miscellaneous"
+    title="Misc"
     loading={loading}
     icon={<MiscIcon style={{ height: '2rem', width: '6rem' }} />}
   >
