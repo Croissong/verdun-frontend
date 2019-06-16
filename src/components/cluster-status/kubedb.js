@@ -8,13 +8,13 @@ import { get } from 'lodash';
 const KubedbStatus = ({ loading, metrics }) => {
   return (
     <Status
-      title="Kubedb"
+      title="KubeDB"
       loading={loading}
       icon={<KubedbIcon style={{ height: '2rem', width: '6rem' }} />}
     >
       <PodStatus
         icon={<KubedbIcon style={{ height: '2rem', width: '2rem' }} />}
-        title="Kubedb Operator"
+        title="KubeDB Operator"
         subheader="Run databases Kubernetes"
         metrics={get(metrics, 'kubedb-operator')}
       />
