@@ -5,7 +5,7 @@ export const headerStyles = makeStyles((theme) => ({
     marginBottom: '2rem'
   },
   header: {
-    padding: '0.2rem 10% 0.2rem 1rem',
+    padding: '0.2rem 13% 0.2rem 1rem',
     justifyContent: 'center',
     display: 'flex'
   },
