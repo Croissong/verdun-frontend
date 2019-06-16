@@ -14,8 +14,8 @@ const KubedbStatus = ({ loading, metrics }) => {
     >
       <PodStatus
         icon={<KubedbIcon style={{ height: '2rem', width: '2rem' }} />}
-        title="Kubedb"
-        subheader="Kubedb Edge Router"
+        title="Kubedb Operator"
+        subheader="Run databases Kubernetes"
         metrics={get(metrics, 'kubedb-operator')}
       />
     </Status>
