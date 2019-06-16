@@ -1,4 +1,5 @@
 var proxy = require('http-proxy-middleware');
+var express = require('express');
 
 module.exports = {
   siteMetadata: {
@@ -87,5 +88,6 @@ module.exports = {
         changeOrigin: true
       })
     );
+    app.use('/mock', express.static('mock'));
   }
 };

@@ -1,0 +1,44 @@
+kube_pod_labels{namespace="traefik",pod="traefik-59c59c9696-xx67k",label_pod_template_hash="59c59c9696"} 1
+kube_pod_container_status_ready{namespace="traefik",pod="traefik-59c59c9696-xx67k",container="traefik"} 1
+kube_pod_container_info{namespace="traefik",pod="traefik-59c59c9696-xx67k",container="traefik",image="traefik:1.7.12-alpine"} 1
+
+kube_pod_labels{namespace="traefik",pod="traefik-auth-proxy-8697c4cb95-bb4sk",label_pod_template_hash="8697c4cb95"} 1
+kube_pod_container_info{namespace="traefik",pod="traefik-auth-proxy-8697c4cb95-bb4sk",container="auth-proxy",image="quay.io/pusher/oauth2_proxy:v3.2.0"} 1
+kube_pod_container_status_ready{namespace="traefik",pod="traefik-auth-proxy-8697c4cb95-bb4sk",container="auth-proxy"} 1
+
+kube_pod_labels{namespace="matrix",pod="matrix-riot-54cc47956c-lxgcw",label_app="matrix-riot",label_pod_template_hash="54cc47956c",label_release="matrix-riot"} 1
+kube_pod_labels{namespace="verdun",pod="pause"} 1
+kube_pod_labels{namespace="matrix",pod="matrix-synapse-66b58b999c-xt76r",label_app="matrix-synapse",label_pod_template_hash="66b58b999c",label_release="matrix-synapse"} 1
+kube_pod_labels{namespace="kubedb",pod="kubedb-operator-66fbd9fd44-z8295",label_pod_template_hash="66fbd9fd44",label_app="kubedb"} 1
+kube_pod_labels{namespace="hefeteig",pod="hefeteig-app-778cf486f-rpjgz",label_pod_template_hash="778cf486f",label_release="hefeteig-app",label_app="hefeteig-app",label_chart="hefeteig-app",label_heritage="Tiller"} 1
+kube_pod_labels{namespace="verdun",pod="kube-state-metrics-575d57dcbd-bk4bh",label_app="kube-state-metrics",label_pod_template_hash="575d57dcbd",label_release="kube-state-metrics"} 1
+kube_pod_labels{namespace="murmur",pod="murmur-mysql-0",label_kubedb_com_kind="MySQL",label_kubedb_com_name="murmur-mysql",label_statefulset_kubernetes_io_pod_name="murmur-mysql-0",label_controller_revision_hash="murmur-mysql-b9f4ddd6f"} 1
+kube_pod_labels{namespace="verdun",pod="verdun-frontend-f8b9666f8-vp8b5",label_app="verdun-frontend",label_chart="verdun-frontend",label_heritage="Tiller",label_pod_template_hash="f8b9666f8",label_release="verdun-frontend",label_version="9e36a949"} 1
+kube_pod_labels{namespace="misc",pod="nginx-rtmp-996478cfd-tlx2c",label_app="nginx-rtmp",label_pod_template_hash="996478cfd",label_release="nginx-rtmp"} 1
+kube_pod_labels{namespace="matrix",pod="matrix-synapse-postgres-0",label_kubedb_com_kind="Postgres",label_kubedb_com_name="matrix-synapse-postgres",label_kubedb_com_role="primary",label_statefulset_kubernetes_io_pod_name="matrix-synapse-postgres-0",label_controller_revision_hash="matrix-synapse-postgres-68cbd56ddb"} 1
+kube_pod_labels{namespace="murmur",pod="murmur-848755f6f9-9bpg5",label_app="murmur",label_pod_template_hash="848755f6f9",label_release="murmur"} 1
+
+kube_pod_container_info{namespace="verdun",pod="pause",container="pause",image="tutum/dnsutils:latest",image_id="docker-pullable://tutum/dnsutils@sha256:d2244ad47219529f1003bd1513f5c99e71655353a3a63624ea9cb19f8393d5fe",container_id="docker://b88d657c37273842892431c76f7ce2799d1d7cfae4a33d59738afa6240c3c7b3"} 1
+kube_pod_container_info{namespace="matrix",pod="matrix-synapse-66b58b999c-xt76r",container="matrix-synapse",image="croissong/matrix-synapse-s3-storage:v1.0.0",image_id="docker-pullable://croissong/matrix-synapse-s3-storage@sha256:144db40be254a1cb9e06833f82b43e329c9efafd6fe4ba09c1f6240390efb7e2",container_id="docker://571d32a9653286e596c8220eb7c28bae6e283bc38721b9ae9a33a5a59928bc0e"} 1
+kube_pod_container_info{namespace="matrix",pod="matrix-riot-54cc47956c-lxgcw",container="matrix-riot",image="bubuntux/riot-web:v1.2.2-rc.1",image_id="docker-pullable://bubuntux/riot-web@sha256:d27ed0b9fd1eb1c58c337b85175163f697e4aeebef828e4fb4468cb0d8c00c15",container_id="docker://5cdd5b2b56e8a5f0661bdced1a7457832b0c89185b84fb397f9f7ff217be014c"} 1
+kube_pod_container_info{namespace="kubedb",pod="kubedb-operator-66fbd9fd44-z8295",container="operator",image="kubedb/operator:0.12.0",image_id="docker-pullable://kubedb/operator@sha256:a03668462ccce1cea7ef56adcd423a56ecc2227526c0310e74890461e725c7cb",container_id="docker://f17717bd0f147cc2bce58f23a1b0ca0bcee622968425416b1a1485883bfea74b"} 1
+kube_pod_container_info{namespace="verdun",pod="kube-state-metrics-575d57dcbd-bk4bh",container="kube-state-metrics",image="bitnami/kube-state-metrics:1.6.0-r28",image_id="docker-pullable://bitnami/kube-state-metrics@sha256:9070d711adfd66e99d0fc7471eee113d25703cfbdcbddbc29914f96e1a321c8a",container_id="docker://30cc5b02855fc5ec65e7d119aa877fbb1b0266b0ed3ffedb84901a8c8a3389bb"} 1
+kube_pod_container_info{namespace="murmur",pod="murmur-mysql-0",container="mysql",image="kubedb/mysql:5.7.25",image_id="docker-pullable://kubedb/mysql@sha256:55c69b7ddcaa0100b65b45df81293aed397e44d6a551a4bd7fae7c9f2b50440f",container_id="docker://b746ad1d7d59f274a96e05404b36986ee8175fe8e1ef132fb5734cab061d4cdf"} 1
+kube_pod_container_info{namespace="verdun",pod="verdun-frontend-f8b9666f8-vp8b5",container="verdun-frontend",image="bitnami/nginx:1.16.0",image_id="docker-pullable://bitnami/nginx@sha256:49ff44996a98594ed9527a2050a0a5dcbf6eaed9250a55444c7373b7810f224b",container_id="docker://20cbe4f49009232a6d3a8b2d54748f5efefbd90921545360b85f1c4393a9c2ef"} 1
+kube_pod_container_info{namespace="misc",pod="nginx-rtmp-996478cfd-tlx2c",container="nginx-rtmp",image="tiangolo/nginx-rtmp:latest",image_id="docker-pullable://tiangolo/nginx-rtmp@sha256:640fbf75dc4bc688363afc41574fcc23b3a8490e8c710a13f45502afb91ea5ae",container_id="docker://a65f527c805c13b6ee3f15c1ce86c780375e71d00dcb975f9f1495658e07540f"} 1
+kube_pod_container_info{namespace="hefeteig",pod="hefeteig-app-778cf486f-rpjgz",container="hefeteig-app",image="registry.gitlab.com/donkebap/hefeteig-app:latest",image_id="docker-pullable://registry.gitlab.com/donkebap/hefeteig-app@sha256:39921772a6eccf2924fc9cc3aa977a8190774cf37109d04fe427dbf17a6770ba",container_id="docker://fe955d679014d66a8266b3ca35449ca6f3dd766fd4b2e5c705aa39527fbe3c9e"} 1
+kube_pod_container_info{namespace="matrix",pod="matrix-synapse-postgres-0",container="postgres",image="kubedb/postgres:11.2",image_id="docker-pullable://kubedb/postgres@sha256:0d2599985b543cfd25ad3ae3bd17a08c7e8aa799e84310900bdc68111c60d356",container_id="docker://8d974922c5a375c9551c87d804f8a12d1af25a5b32debcd79e18899b9517eb39"} 1
+kube_pod_container_info{namespace="murmur",pod="murmur-848755f6f9-9bpg5",container="murmur",image="goofball222/murmur:rc",image_id="docker-pullable://goofball222/murmur@sha256:b62b49136843a0a28d4b1b027fe611ac3a090389278a1f25f67252818acfa95f",container_id="docker://a1a0fd9499934f5e38a4c95a907702b0a519631d5d07e191b588acd52e71a4e5"} 1
+
+
+kube_pod_container_status_ready{namespace="matrix",pod="matrix-riot-54cc47956c-lxgcw",container="matrix-riot"} 1
+kube_pod_container_status_ready{namespace="verdun",pod="pause",container="pause"} 1
+kube_pod_container_status_ready{namespace="matrix",pod="matrix-synapse-66b58b999c-xt76r",container="matrix-synapse"} 1
+kube_pod_container_status_ready{namespace="kubedb",pod="kubedb-operator-66fbd9fd44-z8295",container="operator"} 1
+kube_pod_container_status_ready{namespace="hefeteig",pod="hefeteig-app-778cf486f-rpjgz",container="hefeteig-app"} 1
+kube_pod_container_status_ready{namespace="verdun",pod="kube-state-metrics-575d57dcbd-bk4bh",container="kube-state-metrics"} 1
+kube_pod_container_status_ready{namespace="murmur",pod="murmur-mysql-0",container="mysql"} 1
+kube_pod_container_status_ready{namespace="verdun",pod="verdun-frontend-f8b9666f8-vp8b5",container="verdun-frontend"} 1
+kube_pod_container_status_ready{namespace="misc",pod="nginx-rtmp-996478cfd-tlx2c",container="nginx-rtmp"} 1
+kube_pod_container_status_ready{namespace="matrix",pod="matrix-synapse-postgres-0",container="postgres"} 1
+kube_pod_container_status_ready{namespace="murmur",pod="murmur-848755f6f9-9bpg5",container="murmur"} 1

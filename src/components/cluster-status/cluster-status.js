@@ -61,8 +61,9 @@ const getApplicationHealth = (metrics) =>
     min
   )(metrics);
 
+const metricsUrl = __DEVELOPMENT__ ? '/mock/metrics.txt' : '/metrics';
 const fetchMetrics = () => {
-  return axios.get('/metrics').then(({ data }) => {
+  return axios.get(metricsUrl).then(({ data }) => {
     let metrics = parsePrometheusTextFormat(data);
     metrics = normalizeMetrics(metrics);
     console.log(metrics);
