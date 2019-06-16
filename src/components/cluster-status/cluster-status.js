@@ -14,7 +14,7 @@ import HeartbeatIcon from '../../images/heartbeat.svg';
 import { headerStyles } from './cluster-status.styles';
 
 const ClusterStatus = () => {
-  const [metrics, setMetrics] = useState({});
+  const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -118,7 +118,7 @@ const normalizeMetrics = (data) => {
 };
 
 const StatusSection = ({ children, metrics, namespaces, title }) => {
-  const healthy = getNamespacesHealth(namespaces, metrics);
+  const healthy = metrics ? getNamespacesHealth(namespaces, metrics) : true;
   const classes = headerStyles({ healthy });
   return (
     <section className={classes.section}>

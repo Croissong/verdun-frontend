@@ -39,7 +39,7 @@ module.exports = {
         disabledFeatures: [
           'shorthands',
           'cloning',
-          'currying',
+          // 'currying',
           'caching',
           'collections',
           'exotics',
