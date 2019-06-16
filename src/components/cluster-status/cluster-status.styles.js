@@ -5,18 +5,13 @@ export const headerStyles = makeStyles((theme) => ({
     marginBottom: '2rem'
   },
   header: {
-    padding: '0.2rem 24px',
-    display: 'grid',
-    gridTemplate: `
-[row1-start] 'status title' [row1-end]
-/ 6rem 35%
-`
+    padding: '0.2rem 10% 0.2rem 1rem',
+    justifyContent: 'center',
+    display: 'flex'
   },
   title: {
-    gridArea: 'title',
     display: 'flex',
     justifyContent: 'center',
-    paddingLeft: '1rem',
     '& h2': {
       fontFamily: 'serif',
       fontWeight: 500,
@@ -27,10 +22,11 @@ export const headerStyles = makeStyles((theme) => ({
     }
   },
   status: {
-    gridArea: 'status',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: '5%',
+    width: '6rem',
     paddingTop: '0.5rem'
   },
   heartbeat: {

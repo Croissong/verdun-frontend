@@ -9,6 +9,7 @@ import MumbleStatus from './mumble';
 import VerdunStatus from './verdun';
 import MiscStatus from './misc';
 import TraefikStatus from './traefik';
+import KubedbStatus from './kubedb';
 import { HorizontalBar } from '../shared/bars';
 import HeartbeatIcon from '../../images/heartbeat.svg';
 import { headerStyles } from './cluster-status.styles';
@@ -49,13 +50,14 @@ const ClusterStatus = () => {
       >
         <VerdunStatus loading={loading} metrics={get(metrics, 'verdun')} />
         <TraefikStatus loading={loading} metrics={get(metrics, 'traefik')} />
+        <KubedbStatus loading={loading} metrics={get(metrics, 'kubedb')} />
       </StatusSection>
     </>
   );
 };
 
 const appNamespaces = ['hefeteig', 'matrix', 'misc', 'murmur'];
-const infraNamespaces = ['traefik', 'verdun'];
+const infraNamespaces = ['traefik', 'verdun', 'kubedb'];
 
 const getNamespacesHealth = (namespaces, metrics) => {
   return flow(
@@ -118,7 +120,7 @@ const normalizeMetrics = (data) => {
 };
 
 const StatusSection = ({ children, metrics, namespaces, title }) => {
-  const healthy = metrics ? getNamespacesHealth(namespaces, metrics) : true;
+  const healthy = getNamespacesHealth(namespaces, metrics);
   const classes = headerStyles({ healthy });
   return (
     <section className={classes.section}>
