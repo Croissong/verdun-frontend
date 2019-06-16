@@ -1,7 +1,7 @@
 import React from 'react';
 import MumbleIcon from '../../images/mumble.svg';
 import MysqlIcon from '../../images/mysql.svg';
-import ContainerStatus from './container-status';
+import PodStatus from './pod-status';
 import Status from './status';
 import { get } from 'lodash';
 
@@ -11,18 +11,18 @@ const MumbleStatus = ({ loading, metrics }) => (
     loading={loading}
     icon={<MumbleIcon style={{ height: '2rem', width: '6rem' }} />}
   >
-    <ContainerStatus
+    <PodStatus
       icon={<MumbleIcon style={{ height: '2rem', width: '2rem' }} />}
       title="Murmur"
       subheader="Mumble Server"
       metrics={get(metrics, 'murmur')}
     />
 
-    <ContainerStatus
+    <PodStatus
       icon={<MysqlIcon style={{ height: '2rem', width: '2rem' }} />}
       title="MysqlQL Murmur"
       subheader="Database for Murmur"
-      metrics={get(metrics, 'mysql')}
+      metrics={get(metrics, 'murmur-mysql-0')}
     />
   </Status>
 );

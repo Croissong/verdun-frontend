@@ -5,15 +5,19 @@ import ListItem from '@material-ui/core/ListItem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import { get, minBy } from 'lodash';
 
-const ContainerStatus = ({ title, subheader, icon, metrics, images }) => {
+const ContainerStatus = ({ title, subheader, icon, metrics }) => {
   const classes = useStyles();
-  const isHealthy = metrics ? metrics.ready : true;
+  const containers = get(metrics, 'containers');
+  const isHealthy = containers
+    ? minBy(Object.values(containers), ({ ready }) => ready)
+    : true;
   return (
     <ListItem>
       <Card className={`${classes.card} ${isHealthy ? classes.healthy : ''}`}>
         <Header icon={icon} title={title} subheader={subheader} />
-        {metrics && <Metrics metrics={metrics} images={images} />}
+        {containers && <Metrics containers={containers} />}
       </Card>
     </ListItem>
   );
@@ -29,25 +33,14 @@ const Header = ({ icon, title, subheader }) => {
   );
 };
 
-const Metrics = ({ metrics, images }) => {
+const Metrics = ({ containers }) => {
   return (
     <CardContent>
-      {!images ? (
-        <Typography key={metrics.image}>
-          Image: <code>{metrics.image}</code>
+      {Object.values(containers).map((container) => (
+        <Typography key={container.image}>
+          Image: <code>{container.image}</code>
         </Typography>
-      ) : (
-        [
-          <Typography key={images.image}>
-            Image: <code>{images.image}</code>
-          </Typography>,
-          ...images.extra.map((img) => (
-            <Typography key={metrics.image}>
-              {img.name}: <code>{img.image}</code>
-            </Typography>
-          ))
-        ]
-      )}
+      ))}
     </CardContent>
   );
 };
@@ -67,5 +60,10 @@ const useStyles = makeStyles((theme) => ({
     padding: '16px'
   }
 }));
+
+const getContainerMetrics = (container, metrics, images) => {
+  const pod = metrics.containers[container];
+  return metrics.pods;
+};
 
 export default ContainerStatus;
