@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import { PodStatus } from 'generated/graphql';
+import { PodStatus, ContainerStatus } from 'generated/graphql';
 import Highlight from 'prism-react-renderer';
 import Prism from 'prismjs'; // Different source
 
@@ -17,7 +17,7 @@ type ContainerStatusProps = {
   icon: React.ReactNode;
   metrics: PodStatus;
 };
-const ContainerStatus: React.FC<ContainerStatusProps> = ({
+const PodStatusComponent: React.FC<ContainerStatusProps> = ({
   title,
   subheader,
   url,
@@ -30,12 +30,17 @@ const ContainerStatus: React.FC<ContainerStatusProps> = ({
     <ListItem>
       <Card className={`${classes.card} ${isHealthy ? classes.healthy : ''}`}>
         <Header {...{ icon, title, subheader, url }} />
-        {metrics && <Metrics containers={metrics.containers} />}
+        {metrics && (
+          <Metrics
+            containers={metrics.containers}
+            initContainers={metrics.initContainers}
+          />
+        )}
       </Card>
     </ListItem>
   );
 };
-export default ContainerStatus;
+export default PodStatusComponent;
 
 type HeaderProps = {
   title: string;
@@ -54,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ icon, title, subheader, url }) => {
             <a
               href={url}
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noopener noreferrer nofollow"
               className={classes.url}
             >
               {url.replace('https://', '')}
@@ -66,14 +71,18 @@ const Header: React.FC<HeaderProps> = ({ icon, title, subheader, url }) => {
   );
 };
 
-const Metrics = ({ containers }) => {
+type MetricsProps = {
+  containers: ContainerStatus[];
+  initContainers: ContainerStatus[];
+};
+const Metrics: React.FC<MetricsProps> = ({ containers, initContainers }) => {
   return (
     <CardContent>
-      {Object.values(containers).map(({ image }) => {
+      {[...initContainers, ...containers].map(({ container, image }) => {
         const code = `Image: ${image}`;
         return (
           <Highlight
-            key={image}
+            key={container}
             theme={undefined}
             Prism={Prism}
             code={code}

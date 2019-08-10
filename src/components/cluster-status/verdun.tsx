@@ -28,7 +28,7 @@ const VerdunStatus = () => {
         title="Verdun Frontend"
         subheader="Cluster statuspage"
         url="https://verdun.patrician.gold"
-        metrics={metrics['verdun-frontend']}
+        metrics={metrics['verdun-frontend-nginx']}
       />
 
       <PodStatus

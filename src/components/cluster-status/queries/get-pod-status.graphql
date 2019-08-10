@@ -6,7 +6,11 @@ query GetPodStatus($labels: [Label], $namespaces: [String]) {
     containers {
       container,
       image
-    }
+    },
+    initContainers {
+      container,
+      image
+    },
     ready {
       value
     }

@@ -32,6 +32,7 @@ const useStyles = makeStyles<Theme, Params>((theme) => ({
         borderTopLeftRadius: '.25em'
       },
       '&:nth-child(2)': {
+        width: 50,
         borderBottomRightRadius: '0.25em',
         borderTopRightRadius: '.25em'
       }

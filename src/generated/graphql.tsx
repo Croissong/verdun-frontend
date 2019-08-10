@@ -41,7 +41,7 @@ export type PodStatus = {
   label_app?: Maybe<Scalars['String']>;
   ready?: Maybe<MetricValue>;
   containers?: Maybe<Array<Maybe<ContainerStatus>>>;
-  initContainers?: Maybe<ContainerStatus>;
+  initContainers?: Maybe<Array<Maybe<ContainerStatus>>>;
 };
 
 export type Query = {
@@ -77,6 +77,16 @@ export type GetPodStatusQuery = { __typename?: 'Query' } & {
                 >
               >
             >;
+            initContainers: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'ContainerStatus' } & Pick<
+                    ContainerStatus,
+                    'container' | 'image'
+                  >
+                >
+              >
+            >;
             ready: Maybe<
               { __typename?: 'MetricValue' } & Pick<MetricValue, 'value'>
             >;
@@ -93,6 +103,10 @@ export const GetPodStatusDocument = gql`
       pod
       label_app
       containers {
+        container
+        image
+      }
+      initContainers {
         container
         image
       }
