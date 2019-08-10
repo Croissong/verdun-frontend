@@ -7,5 +7,5 @@ RUN yarn build
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /app/public .
+COPY --from=builder /app/build .
 CMD cp

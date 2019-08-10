@@ -1,0 +1,14 @@
+query GetPodStatus($labels: [Label], $namespaces: [String]) {
+  podStatus(labels: $labels,namespaces: $namespaces) {
+    namespace,
+    pod,
+    label_app,
+    containers {
+      container,
+      image
+    }
+    ready {
+      value
+    }
+  }
+}

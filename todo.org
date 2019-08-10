@@ -1,5 +1,10 @@
 - https://wearestabl.com/
 - https://github.com/FormidableLabs/urql
-- https://github.com/kubernetes/kube-state-metrics/pull/762
 - https://status.discordapp.com/incidents/mpzkz7m4fzpt
 - TOC https://www.openpolicyagent.org/docs/latest
+
+https://preactjs.com/
+https://github.com/microsoft/TypeScript/issues/16#issuecomment-515160784
+
+https://blog.logrocket.com/build-a-graphql-react-app-with-typescript/
+https://github.com/graphql/dataloader
