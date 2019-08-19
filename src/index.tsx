@@ -28,8 +28,7 @@ const client = new ApolloClient({
       credentials: 'same-origin'
     })
   ]),
-  cache: new InMemoryCache(),
-  ssrMode: true
+  cache: new InMemoryCache()
 });
 
 const ApolloApp = () => (
