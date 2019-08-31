@@ -57,7 +57,7 @@
     "@graphql-codegen/typescript": "1.6.1",
     "@graphql-codegen/typescript-graphql-files-modules": "1.6.1",
     "@graphql-codegen/typescript-operations": "1.6.1",
-    "@graphql-codegen/typescript-react-apollo": "1.6.1",
+    "@graphql-codegen/typescript-react-apollo": "1.7.0",
     "@types/ramda": "types/npm-ramda#dist",
     "babel-plugin-prismjs": "^1.1.1",
     "babel-plugin-ramda": "^2.0.0",
