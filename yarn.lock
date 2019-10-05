@@ -1018,12 +1018,22 @@
     import-from "3.0.0"
     tslib "1.10.0"
 
-"@graphql-codegen/typescript-graphql-files-modules@1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-graphql-files-modules/-/typescript-graphql-files-modules-1.6.1.tgz#3db696f3737a3b828ea229e1f67350a15d7a763d"
-  integrity sha512-I7pYZD/SlCe7y3uCN2ETQLhQSgcbj+LUfuHBdnqeAgns6x9QpW89n2qir2aVIiOCbmcpmFqtboAWWmeJY4zrwQ==
+"@graphql-codegen/plugin-helpers@1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.8.1.tgz#e84eb40988a0d4c0bdfb386d4a8628bf0901c6e3"
+  integrity sha512-gYvt9h/IN77ti7N88GIuSuX9LSGYNnGzpOovG3YBNdOKo4yYc5VT5TcbirigW101jHzjIPNSZVgFPWWg6HSxug==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.6.1"
+    change-case "3.1.0"
+    common-tags "1.8.0"
+    import-from "3.0.0"
+    tslib "1.10.0"
+
+"@graphql-codegen/typescript-graphql-files-modules@1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-graphql-files-modules/-/typescript-graphql-files-modules-1.8.1.tgz#14dfeedf72311fca09e07f486a2776a513080b0a"
+  integrity sha512-FVVqAEaB4LQzLMv8lv3hByUtTKZjizI4KSQRPx68ftGIw6Fn2RY6w22XpkEmPAX3VZCuoxOnZApAvfeDW9ZUpw==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "1.8.1"
     tslib "1.10.0"
 
 "@graphql-codegen/typescript-operations@1.6.1":
@@ -1873,10 +1883,10 @@
   version "0.25.0"
   resolved "https://codeload.github.com/types/npm-ramda/tar.gz/9529aa3c8ff70ff84afcbc0be83443c00f30ea90"
 
-"@types/react-dom@16.8.5":
-  version "16.8.5"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.5.tgz#3e3f4d99199391a7fb40aa3a155c8dd99b899cbd"
-  integrity sha512-idCEjROZ2cqh29+trmTmZhsBAUNQuYrF92JHKzZ5+aiFM1mlSk3bb23CK7HhYuOY75Apgap5y2jTyHzaM2AJGA==
+"@types/react-dom@16.9.0":
+  version "16.9.0"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.0.tgz#ba6ddb00bf5de700b0eb91daa452081ffccbfdea"
+  integrity sha512-OL2lk7LYGjxn4b0efW3Pvf2KBVP0y1v3wip1Bp7nA79NkOpElH98q3WdCEdDj93b2b0zaeBG9DvriuKjIK5xDA==
   dependencies:
     "@types/react" "*"
 
