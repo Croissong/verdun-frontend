@@ -52,7 +52,7 @@
   "devDependencies": {
     "@gfx/zopfli": "^1.0.14",
     "@graphql-codegen/cli": "^1.6.1",
-    "@graphql-codegen/fragment-matcher": "1.6.1",
+    "@graphql-codegen/fragment-matcher": "1.11.2",
     "@graphql-codegen/introspection": "1.6.1",
     "@graphql-codegen/typescript": "1.6.1",
     "@graphql-codegen/typescript-graphql-files-modules": "1.6.1",
